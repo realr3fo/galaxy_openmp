@@ -84,9 +84,9 @@ int main(int argc, char *argv[]) {
     // histogram: DD
     double x1, y1, x2, y2, result, degree, formula;
     int i, j, degree_index;
-    #pragma omp parallel shared(real_rasc, real_decl, real_rasc, real_decl, histogram_DD) private (i, j, x1, y1, x2, y2, result, degree, degree_index, formula)
+#pragma omp parallel shared(real_rasc, real_decl, rand_rasc, rand_decl, histogram_DD) private (i, j, x1, y1, x2, y2, result, degree, degree_index, formula)
     {
-        #pragma omp for schedule(static)
+#pragma omp for schedule(static)
         for (i = 0; i < 100000; i++) {
             for (j = 0; j < 100000; j++) {
                 x1 = real_rasc[i], y1 = real_decl[i], x2 = real_rasc[j], y2 = real_decl[j];
@@ -98,16 +98,16 @@ int main(int argc, char *argv[]) {
                 degree = result * (180 / M_PI);
                 degree_index = floor(degree * 4);
 
-                #pragma omp atomic
+#pragma omp atomic
                 histogram_DD[degree_index] += 1;
             }
         }
     }
 
     // histogram: DR
-    #pragma omp parallel shared(real_rasc, real_decl, real_rasc, real_decl, histogram_DR) private (i, j, x1, y1, x2, y2, result, degree, degree_index, formula)
+#pragma omp parallel shared(real_rasc, real_decl, rand_rasc, rand_decl, histogram_DR) private (i, j, x1, y1, x2, y2, result, degree, degree_index, formula)
     {
-        #pragma omp for schedule(static)
+#pragma omp for schedule(static)
         for (i = 0; i < 100000; i++) {
             for (j = 0; j < 100000; j++) {
                 x1 = real_rasc[i], y1 = real_decl[i], x2 = rand_rasc[j], y2 = rand_decl[j];
@@ -119,16 +119,16 @@ int main(int argc, char *argv[]) {
                 degree = result * (180 / M_PI);
                 degree_index = floor(degree * 4);
 
-                #pragma omp atomic
+#pragma omp atomic
                 histogram_DR[degree_index] += 1;
             }
         }
     }
 
     // histogram: RR
-    #pragma omp parallel shared(real_rasc, real_decl, real_rasc, real_decl, histogram_RR) private (i, j, x1, y1, x2, y2, result, degree, degree_index, formula)
+#pragma omp parallel shared(real_rasc, real_decl, rand_rasc, rand_decl, histogram_RR) private (i, j, x1, y1, x2, y2, result, degree, degree_index, formula)
     {
-        #pragma omp for schedule(static)
+#pragma omp for schedule(static)
         for (i = 0; i < 100000; i++) {
             for (j = 0; j < 100000; j++) {
                 x1 = rand_rasc[i], y1 = rand_decl[i], x2 = rand_rasc[j], y2 = rand_decl[j];
@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
                 degree = result * (180 / M_PI);
                 degree_index = floor(degree * 4);
 
-                #pragma omp atomic
+#pragma omp atomic
                 histogram_RR[degree_index] += 1;
             }
         }
