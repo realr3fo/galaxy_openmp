@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
         #pragma omp for schedule(static)
         for (i = 0; i < 100000; i++) {
             for (j = 0; j < 100000; j++) {
-                x1 = real_rasc[i], y1 = real_decl[i], x2 = real_rasc[j], y2 = real_decl[j];
+                x1 = real_rasc[i], y1 = real_decl[i], x2 = rand_rasc[j], y2 = rand_decl[j];
                 formula = (sin(y1) * sin(y2)) + (cos(y1) * cos(y2) * cos(x1 - x2));
                 if (formula > 1) {
                     formula = 1;
@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
         #pragma omp for schedule(static)
         for (i = 0; i < 100000; i++) {
             for (j = 0; j < 100000; j++) {
-                x1 = real_rasc[i], y1 = real_decl[i], x2 = real_rasc[j], y2 = real_decl[j];
+                x1 = rand_rasc[i], y1 = rand_decl[i], x2 = rand_rasc[j], y2 = rand_decl[j];
                 formula = (sin(y1) * sin(y2)) + (cos(y1) * cos(y2) * cos(x1 - x2));
                 if (formula > 1) {
                     formula = 1;
