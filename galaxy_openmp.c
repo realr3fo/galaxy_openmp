@@ -84,6 +84,7 @@ int main(int argc, char *argv[]) {
     // histogram: DD
     double x1, y1, x2, y2, result, degree, formula;
     int i, j, degree_index;
+    printf("Begin the calculation\n");
 #pragma omp parallel shared(real_rasc, real_decl, rand_rasc, rand_decl, histogram_DD) private (i, j, x1, y1, x2, y2, result, degree, degree_index, formula)
     {
 #pragma omp for schedule(static)
@@ -145,6 +146,7 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+    printf("Finished the calculation\n");
 
     // check point: the sum of all historgram entries should be 10 000 000 000
     long int histsum = 0L;
